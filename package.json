@@ -1,11 +1,27 @@
 {
-  "name": "@memberclicks/{module-name}",
+  "name": "mc-logger",
   "version": "0.0.0",
-  "description": "",
-  "main": "mc-index.js",
+  "description": "Memberclicks specific logging module. This will extend colors and log modules",
+  "main": "mc-logger.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Memberclicks",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/memberclicks/npm-logger.git"
+  },
+  "keywords": [
+    "logger"
+  ],
+  "author": "Joshua Gonzalez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/memberclicks/npm-logger/issues"
+  },
+  "homepage": "https://github.com/memberclicks/npm-logger#readme",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "lodash": "^4.5.1",
+    "log": "^1.4.0"
+  }
 }
