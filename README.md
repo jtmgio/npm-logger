@@ -24,7 +24,9 @@ To publish any future updates you will need to update the version with `npm vers
 
 ####Installing
 - To install the new module in your project, run `npm install @memberclicks/{yourmodulename} --save` in your project's __server__ directory. This will install the module under __node_modules/@memberclicks__.  
-- To update the module to the latest version run `npm update @memberclicks/{yourmodulename} --save`. This should update your project's __package.json__ to the latest version. If it does not you can manually update it.  
+- To update the module to the latest version  
+  - cd into your project's __server__ directory, open __package.json__ and change the version number to latest.
+  - run `npm install @memberclicks/{yourmodulename} --save` This will update your module to the latest version as well as the version number in __package.json__.
 - To see what packages need updating run `npm outdated`.
 
 ####Use
