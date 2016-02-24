@@ -17,7 +17,7 @@
 		"module": "invoice", 
 		"logger": "routes.list.list.controller", 
 		"message": "The response was 200 and 400" 
-	}	
+	}cl	
 	
 	@[log-level] - the log level for the outputted log. This will default to log level of 6 (info)	
 	@message - The string based message to send to the sdtout
@@ -115,9 +115,6 @@ Logger.prototype.writeMessage = function( params ){
 		"message": "The response was 200 and 400" 
 	}
 
-
-console.log(addresses);	
-	
 	return this;
 };
 //================================================================================//
@@ -142,4 +139,6 @@ function fnGetLogLevelInfo( defaults ){
 ** DESC - this will get the server IP address
 **-------------------------------------------------------------------------------------
 */
-function 
+function fnGetServerIp(){
+	
+}
