@@ -2,7 +2,7 @@
   "name": "mc-logger",
   "version": "0.0.0",
   "description": "Memberclicks specific logging module. This will extend colors and log modules",
-  "main": "mc-logger.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
