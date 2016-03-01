@@ -8,6 +8,21 @@
 	var cl = require( "@memberclicks/mc-logger" );
 	cl({ log_level : [log-level]|string, message : message|string, args : [args]|array }); ~ cl({ log_level : "info", message : "The response was %s and %s", args : [ 200, 400] });
 	
+	//execute
+	cl({
+		log_level : "info", 
+		message : "hello %s to %s",
+		args : [ "josh", "test" ]
+	});
+	
+	cl( "testing" );
+	
+	cl({
+		log_level : "alert", 
+		message : "hello %s to %s",
+		args : [ "josh", "test" ]
+	});
+	
 	The Output
 	{ 
 		"timestamp": "2016-02-18 10:41:16,585", 

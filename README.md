@@ -1,34 +1,61 @@
-#NPM BOILERPLATE
-Boilerplate for creating new npm modules
+#NPM LOGGER
+NPM Module for logging errors
 
+##The Design	
+	- This will be a logger built directly for MC
+	- This will extend Colors and Log modules
+	- This will follow the MC standards for logging for our log entries service
+	
+##The Implementation
+Require the module using the full path of the module. i.e. var cl = require( "@memberclicks/mc-logger" );
 
-####Conventions
-- The name of modules should be in the format of `@memberclicks/mc-{modulename}` where module is the name of the new module you are creating 
-- The entry point file should be named in accordance with the name of the module. i.e. If the module name is mc-errors, the entry point file should be named mc-errors.js
-- When adding a new github repo with the new module code, the name of the repo should be in the format of `npm-{modulename}` i.e. for mc-errors the corresponding repo name is npm-errors 
+`var cl = require( "@memberclicks/mc-logger" );`
 
+	
+`cl({ log_level : [log-level]|string, message : message|string, args : [args]|array }); ~ cl({ log_level : "info", message : "The response was %s and %s", args : [ 200, 400] });`
 
-####Steps for getting started
-- Make sure you have the latest versions of npm and node installed
-- After creating your user at [https://www.npmjs.com](npmjs.com), contact the super admin to add you to the organization
-- Once you are added, using the terminal, login to the npm registry for the memberclicks org `npm login --scope=@memberclicks` This will take you through the process of logging in with prompts for your username and password 
-- Copy this repo using the [https://import.github.com/new](https://import.github.com/new), renaming it to `npm-{name-of-your-module}`, and clone it locally to a directory of your choosing. General location is an npm modules folder created in you user's directory.
-- Run `npm init --scope=@memberclicks` this will take you through a series of prompts to update __package.json__
-  - Update the name of the module, the description and the name of the main file following the conventions
-  - The version should be 0.0.0
-  - Rename the entry point file following the conventions i.e. if my new module was named __mc-textformatter__, __mc-index.js__ should be renamed to __mc-textformatter.js__
-- Update README.md with any pertinent information for using the module  
-When you are ready to publish your module run `npm publish`  
-To publish any future updates you will need to update the version with `npm version patch` and then run `npm publish`
+```	
+	//execute
+	cl({
+		log_level : "info", 
+		message : "hello %s to %s",
+		args : [ "josh", "test" ]
+	});
+	
+	cl( "testing" );
+	
+	cl({
+		log_level : "alert", 
+		message : "hello %s to %s",
+		args : [ "josh", "test" ]
+	});
+	
+```
 
+###Production Output
 
-####Installing
-- To install the new module in your project, run `npm install @memberclicks/{yourmodulename} --save` in your project's __server__ directory. This will install the module under __node_modules/@memberclicks__.  
-- To update the module to the latest version  
-  - cd into your project's __server__ directory
-  - run `npm install @memberclicks/{yourmodulename}@latest --save` This will update your module to the latest version as well as the version number in __package.json__
-- To see what packages need updating run `npm outdated`
-
-####Use
-To use, require the new module using the full path of the module  
-`var newmodule = require('@memberclicks/{yourmodulename}');`
+```
+{ 
+		"timestamp": "2016-02-18 10:41:16,585", 
+		"server-id": "dock01", 
+		"server-ip": "192.168.10.26", 
+		"level": "INFO", 
+		"module": "invoice", 
+		"logger": "routes.list.list.controller", 
+		"message": "The response was 200 and 400" 
+}	
+```	
+	
+###Code Details	
+@[log-level] - the log level for the outputted log. This will default to log level of 6 (info)	
+@message - The string based message to send to the sdtout
+@[args] - argument list to replace in @message "%s %s"
+	
+0 EMERGENCY system is unusable
+1 ALERT action must be taken immediately
+2 CRITICAL the system is in critical condition
+3 ERROR error condition
+4 WARNING warning condition
+5 NOTICE a normal but significant condition
+6 INFO a purely informational message
+7 DEBUG messages to debug an application
