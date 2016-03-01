@@ -10,6 +10,11 @@ cl = function() { return console.log.apply(console, arguments); };
 **-------------------------------------------------------------------------------------
 */
 function logger( options ){
+	if( ! _.isObject( options ) && _.isString( options )){
+		options = {
+			message : options
+		};
+	}
 	//validate/default options
 	root.options = _.defaults( options, { 
 		log_level : "info", 
@@ -17,7 +22,7 @@ function logger( options ){
 		args : [] 
 	});	
 	//return intance of Logger
-	return new logger.Logger( options, logger.debug );
+	return new logger.Logger( options, logger.debug, logger.module, logger.path );
 }
 //exports
 module.exports = logger;

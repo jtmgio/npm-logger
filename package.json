@@ -21,6 +21,7 @@
   "homepage": "https://github.com/memberclicks/npm-logger#readme",
   "dependencies": {
     "colors": "^1.1.2",
+    "dateformat": "^1.0.12",
     "lodash": "^4.5.1",
     "log": "^1.4.0"
   }
