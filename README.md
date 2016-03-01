@@ -51,11 +51,11 @@ Require the module using the full path of the module. i.e. var cl = require( "@m
 @message - The string based message to send to the sdtout
 @[args] - argument list to replace in @message "%s %s"
 	
-0 EMERGENCY system is unusable
-1 ALERT action must be taken immediately
-2 CRITICAL the system is in critical condition
-3 ERROR error condition
-4 WARNING warning condition
-5 NOTICE a normal but significant condition
-6 INFO a purely informational message
-7 DEBUG messages to debug an application
+- 0 EMERGENCY system is unusable
+- 1 ALERT action must be taken immediately
+- 2 CRITICAL the system is in critical condition
+- 3 ERROR error condition
+- 4 WARNING warning condition
+- 5 NOTICE a normal but significant condition
+- 6 INFO a purely informational message
+- 7 DEBUG messages to debug an application
