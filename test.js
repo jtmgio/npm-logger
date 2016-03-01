@@ -1,6 +1,6 @@
 var cl = require( "./index" );
 //debug
-cl.debug = true;
+cl.debug = false;
 cl.module = "ui-directory-search";
 cl.path = __dirname;
 
