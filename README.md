@@ -15,6 +15,12 @@ Require the module using the full path of the module. i.e. var cl = require( "@m
 `cl({ log_level : [log-level]|string, message : message|string, args : [args]|array }); ~ cl({ log_level : "info", message : "The response was %s and %s", args : [ 200, 400] });`
 
 ```	
+	//debug
+	cl.debug = false;	
+	cl.module = "ui-directory-search";
+	cl.path = __dirname;
+	
+
 	//execute
 	cl({
 		log_level : "info", 
@@ -47,9 +53,9 @@ Require the module using the full path of the module. i.e. var cl = require( "@m
 ```	
 	
 ###Code Details	
-@[log-level] - the log level for the outputted log. This will default to log level of 6 (info)	
-@message - The string based message to send to the sdtout
-@[args] - argument list to replace in @message "%s %s"
+- @[log-level] - the log level for the outputted log. This will default to log level of 6 (info)	
+- @message - The string based message to send to the sdtout
+- @[args] - argument list to replace in @message "%s %s"
 	
 - 0 EMERGENCY system is unusable
 - 1 ALERT action must be taken immediately
