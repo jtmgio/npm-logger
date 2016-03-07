@@ -22,7 +22,7 @@ function logger( options ){
 		args : [] 
 	});	
 	//return intance of Logger
-	return new logger.Logger( options, logger.debug, logger.module, logger.path );
+	return new logger.Logger( options, ( _.indexOf([ "stage", "dev" ], process.env.NODE_ENV ) > -1 ), logger.module, logger.path );
 }
 //exports
 module.exports = logger;
