@@ -18,10 +18,6 @@ function logger( params ){
 		path : __dirname
 	};
 
-	this.debug = params.debug;
-	this.module = params.module;
-	this.path = params.path;
-	
 	return function( options ){
 
 		if( ! _.isObject( options ) && _.isString( options )){
@@ -36,8 +32,8 @@ function logger( params ){
 			message : ">>>no message<<<", 
 			args : [] 
 		});	
-
-		return new logger.Logger( options, root.debug, root.module, root.path );
+		
+		return new logger.Logger( options, params.debug, params.module, params.path );
 	}
 }
 
