@@ -1,6 +1,6 @@
 {
   "name": "@memberclicks/mc-logger",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Memberclicks specific logging module. This will extend colors and log modules",
   "main": "index.js",
   "scripts": {
