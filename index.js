@@ -11,13 +11,15 @@ cl = function() { return console.log.apply(console, arguments); };
 */
 function logger( params ){
 	var root = this;
-
+	//setup the parameter defaults
 	params = params || {
-		debug : false,
+		env : "prod",
 		module : "No Module Given",
 		path : __dirname
 	};
-
+	//are we in debug mode?
+	params.debug = ( _.indexOf( [ "dev", "stage" ], params.env ) > -1 ) ? true : false; 
+	//return our constructor and lib
 	return function( options ){
 
 		if( ! _.isObject( options ) && _.isString( options )){
