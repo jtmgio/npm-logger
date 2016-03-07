@@ -164,7 +164,6 @@ function fnReplaceTokens( message, args ){
 		return message;
 	}
     var chunks = message.split( "%s" );
-    cl( chunks );
     return args.reduce(function( memo, arg, idx ){
         return memo + chunks[ idx ] + arg + ( ! _.isUndefined( chunks[ idx + 1 ] ) ? chunks[ idx + 1 ] : "" );
     }, "");
