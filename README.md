@@ -9,17 +9,12 @@ NPM Module for logging errors
 ##The Implementation
 Require the module using the full path of the module. i.e. var cl = require( "@memberclicks/mc-logger" );
 
-`var cl = require( "@memberclicks/mc-logger" );`
+`var cl = require( "@memberclicks/mc-logger" )({ debug : false||true, path :__dirname, module : "module-name" });`
 
 	
 `cl({ log_level : [log-level]|string, message : message|string, args : [args]|array }); ~ cl({ log_level : "info", message : "The response was %s and %s", args : [ 200, 400] });`
 
 ```	
-	//debug
-	cl.debug = false;	
-	cl.module = "ui-directory-search";
-	cl.path = __dirname;
-	
 
 	//execute
 	cl({

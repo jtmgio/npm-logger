@@ -1,24 +1,19 @@
-var cl = require( "./index" );
-//debug
-cl.debug = false;
-cl.module = "ui-directory-search";
-cl.path = __dirname;
-
-
-//execute
-cl({
-	log_level : "info", 
-	message : "hello %s to %s",
-	args : [ "josh", "test" ]
-});
+var cl = new require( "./index" )({ debug : false, path :__dirname, module : "boo" });
 
 
 cl( "testing" );
 
+cl({ log_level : "error", message : "sorry" });
+
+var xxx = new require( "./index" )({ debug : true, path :__dirname, module : "bar" });
+
+xxx( "xxx" );
 
 
-cl({
-	log_level : "alert", 
-	message : "hello %s to %s",
-	args : [ "josh", "test" ]
-});
+xxx({ log_level : "error", message : "sorry" });
+
+
+var v = new require( "./index" )();
+
+v( "ttt" );
+
