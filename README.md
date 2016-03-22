@@ -7,7 +7,7 @@ NPM Module for logging errors
 	- This will follow the MC standards for logging for our log entries service
 	
 ##The Implementation
-Require the module using the full path of the module. i.e. var cl = require( "@memberclicks/mc-logger" );
+Require the module using the full path of the module. i.e. var cl = require( "mc-logger" );
 
 `var cl = require( "mc-logger" )({ debug : false||true, path :__dirname, module : "module-name" });`
 
