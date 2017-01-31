@@ -18,7 +18,7 @@ function logger( params ){
 		path : __dirname
 	};
 	//are we in debug mode?
-	params.debug = ( _.indexOf( [ "dev", "stage" ], params.env ) > -1 ) ? true : false; 
+	params.debug = ( _.indexOf( [ "dev", "development", "stage" ], params.env ) > -1 ) ? true : false; 
 	//return our constructor and lib
 	return function( options ){
 
