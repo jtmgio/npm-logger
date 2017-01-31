@@ -1,6 +1,6 @@
 {
   "name": "@memberclicks/mc-logger",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Memberclicks specific logging module. This will extend colors and log modules",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,6 @@
     "dateformat": "^1.0.12",
     "lodash": "^4.5.1",
     "log": "^1.4.0",
-     "winston": "^2.3.1"
+    "winston": "^2.3.1"
   }
 }
