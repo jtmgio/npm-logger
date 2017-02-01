@@ -50,15 +50,22 @@
 //================================================================================//
 //=========  required modules  ===================================================//
 //================================================================================//
-var colors, Log, log, _, cl, defaults, os, dateformat;
-_ = require( "lodash" );
-Log = require( "log" );
-log = new Log( "info" );
-colors = require( "colors" );
-os = require( "os" );
-date_format = require( "dateformat" );
-cl = function() { return console.log.apply(console, arguments); };
-defaults = {};
+
+const _ = require( "lodash" );
+const Log = require( "log" );
+const log = new Log( "info" );
+const colors = require( "colors" );
+const os = require( "os" );
+const date_format = require( "dateformat" );
+const cl = function() { return console.log.apply( console, arguments ); };
+const defaults = {};
+const winston = require( "winston" );
+const ts_format = () => ( new Date().getTime() );
+//in the docker container this will add the folder to the correct spot. should only be executed in a 
+//stage/prod env
+const logs_directory = `/data/server/logs`;
+const fs = require( "fs" );
+
 
 //root properties
 //debug
@@ -95,7 +102,7 @@ module.exports = Logger;
 **-------------------------------------------------------------------------------------
 */
 function Logger( params, debug, module, path ){
-	var root = this;
+	let root = this;
 	root.debug = debug || false;
 	root.module = module || "NO MODULE";
 	root.path = path || "";
@@ -118,22 +125,44 @@ Logger.prototype.init = function(){ return this; };
 **-------------------------------------------------------------------------------------
 */
 Logger.prototype.writeMessage = function( params ){
-	var message = fnReplaceTokens( params.message, params.args );
+	let message = fnReplaceTokens( params.message, params.args );
 
 	if( this.debug ){
 		log[ this.log_level ].call( log, message[ this.log_level_info.color ] );			
 		return this;
 	}
-	var output = {
-		"timestamp": date_format( new Date(), "yyyy-mm-dd h:MM:ss TT"), 
-		"server-id": os.hostname(), 
-		"server-ip": fnGetServerIps().join( ", " ), 
-		"level": this.log_level.toUpperCase(), 
-		"module": this.module, 
-		"logger": this.path, 
-		"message": message
+	cl( this.debug );
+	//create the logs directory in the base of the application	
+	if( ! fs.existsSync( logs_directory ) ){
+		fs.mkdirSync( logs_directory );
 	}
-	console.log( output );
+
+	//setup winston to write to the filesystem
+	//wl = winston log
+	const wl = new ( winston.Logger ) ({
+		transports : [
+			new ( winston.transports.Console )({
+				colorize: true, 
+				timestamp : ts_format        
+			}),
+			new ( winston.transports.File )({
+				filename : `${logs_directory}/application-out.log`,
+				timestamp : ts_format,
+				level : "info",
+			})
+		]
+	});
+ 
+	wl.info( message, {
+		server_id: os.hostname(), 
+		server_ip: fnGetServerIps().join( ", " ), 
+		log_level: this.log_level.toUpperCase(), 
+		module: this.module, 
+		logger: this.path, 
+		message: message
+	});	
+
+
 	return this;
 };
 //================================================================================//
@@ -146,7 +175,7 @@ Logger.prototype.writeMessage = function( params ){
 **-------------------------------------------------------------------------------------
 */
 function fnGetLogLevelInfo( defaults ){
-	var log_level, log_level_map;
+	let log_level, log_level_map;
 	log_level = ( _.has( defaults.log_levels_map, this.log_level ) ? this.log_level : defaults.default_log_level );
 	log_level_map = defaults.log_levels_map[ log_level ];
 	log_level_map.name = log_level;
@@ -163,7 +192,7 @@ function fnReplaceTokens( message, args ){
 	if( _.isEmpty( args ) ){
 		return message;
 	}
-    var chunks = message.split( "%s" );
+    let chunks = message.split( "%s" );
     return args.reduce(function( memo, arg, idx ){
         return memo + chunks[ idx ] + arg + ( ! _.isUndefined( chunks[ idx + 1 ] ) ? chunks[ idx + 1 ] : "" );
     }, "");
@@ -176,8 +205,8 @@ function fnReplaceTokens( message, args ){
 **-------------------------------------------------------------------------------------
 */
 function fnGetServerIps(){
-	var interfaces = os.networkInterfaces();
-	var addresses = [];
+	let interfaces = os.networkInterfaces();
+	let addresses = [];
 	for (var k in interfaces) {
 	    for (var k2 in interfaces[k]) {
 	        var address = interfaces[k][k2];
