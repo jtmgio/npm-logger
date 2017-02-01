@@ -61,7 +61,9 @@ const cl = function() { return console.log.apply( console, arguments ); };
 const defaults = {};
 const winston = require( "winston" );
 const ts_format = () => ( new Date().getTime() );
-const logs_directory = `${process.env.PWD}/logs`;
+//in the docker container this will add the folder to the correct spot. should only be executed in a 
+//stage/prod env
+const logs_directory = `/data/server/logs`;
 const fs = require( "fs" );
 
 
