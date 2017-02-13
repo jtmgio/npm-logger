@@ -131,7 +131,6 @@ Logger.prototype.writeMessage = function( params ){
 		log[ this.log_level ].call( log, message[ this.log_level_info.color ] );			
 		return this;
 	}
-	cl( this.debug );
 	//create the logs directory in the base of the application	
 	if( ! fs.existsSync( logs_directory ) ){
 		fs.mkdirSync( logs_directory );
