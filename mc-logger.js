@@ -55,7 +55,7 @@ const _ = require( "lodash" );
 const Log = require( "log" );
 const log = new Log( "info" );
 const colors = require( "colors" );
-const os = require( "os" );
+//const os = require( "os" );
 const date_format = require( "dateformat" );
 const cl = function() { return console.log.apply( console, arguments ); };
 const defaults = {};
@@ -153,8 +153,6 @@ Logger.prototype.writeMessage = function( params ){
 	});
  
 	wl.info( message, {
-		server_id: os.hostname(), 
-		server_ip: fnGetServerIps().join( ", " ), 
 		log_level: this.log_level.toUpperCase(), 
 		module: this.module, 
 		logger: this.path, 
@@ -202,7 +200,7 @@ function fnReplaceTokens( message, args ){
 ** DESC - this will get the server IP address
 ** FROM - https://nodejs.org/api/os.html#os_os_networkinterfaces
 **-------------------------------------------------------------------------------------
-*/
+
 function fnGetServerIps(){
 	let interfaces = os.networkInterfaces();
 	let addresses = [];
@@ -216,3 +214,4 @@ function fnGetServerIps(){
 	}
 	return addresses;	
 }
+*/
