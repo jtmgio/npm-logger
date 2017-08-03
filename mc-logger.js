@@ -66,6 +66,27 @@ const ts_format = () => ( new Date().getTime() );
 const logs_directory = `/data/server/logs`;
 const fs = require( "fs" );
 
+//create the logs directory in the base of the application	
+if( ! fs.existsSync( logs_directory ) ){
+	fs.mkdirSync( logs_directory );
+}
+
+//setup winston to write to the filesystem
+//wl = winston log
+const wl = new ( winston.Logger ) ({
+	transports : [
+		new ( winston.transports.Console )({
+			colorize: true, 
+			timestamp : ts_format        
+		}),
+		new ( winston.transports.File )({
+			filename : `${logs_directory}/application-out.log`,
+			timestamp : ts_format,
+			level : "info",
+		})
+	]
+});
+
 
 //root properties
 //debug
@@ -131,26 +152,6 @@ Logger.prototype.writeMessage = function( params ){
 		log[ this.log_level ].call( log, message[ this.log_level_info.color ] );			
 		return this;
 	}
-	//create the logs directory in the base of the application	
-	if( ! fs.existsSync( logs_directory ) ){
-		fs.mkdirSync( logs_directory );
-	}
-
-	//setup winston to write to the filesystem
-	//wl = winston log
-	const wl = new ( winston.Logger ) ({
-		transports : [
-			new ( winston.transports.Console )({
-				colorize: true, 
-				timestamp : ts_format        
-			}),
-			new ( winston.transports.File )({
-				filename : `${logs_directory}/application-out.log`,
-				timestamp : ts_format,
-				level : "info",
-			})
-		]
-	});
  
 	wl.info( message, {
 		log_level: this.log_level.toUpperCase(), 
