@@ -65,6 +65,8 @@ const ts_format = () => ( new Date().getTime() );
 //stage/prod env
 const logs_directory = `/data/server/logs`;
 const fs = require( "fs" );
+//node 6.9.4 did not like having this as a const
+var wl;
 
 //create the logs directory in the base of the application	
 if( process.env.NODE_ENV != "dev" && ! fs.existsSync( logs_directory ) ){
@@ -74,7 +76,7 @@ if( process.env.NODE_ENV != "dev" && ! fs.existsSync( logs_directory ) ){
 if( process.env.NODE_ENV != "dev" ){
 	//setup winston to write to the filesystem
 	//wl = winston log
-	const wl = new ( winston.Logger ) ({
+	wl = new ( winston.Logger ) ({
 		transports : [
 			new ( winston.transports.Console )({
 				colorize: true, 
