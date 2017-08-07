@@ -67,25 +67,25 @@ const logs_directory = `/data/server/logs`;
 const fs = require( "fs" );
 
 //create the logs directory in the base of the application	
-if( ! fs.existsSync( logs_directory ) ){
+if( process.env.NODE_ENV != "dev" && ! fs.existsSync( logs_directory ) ){
 	fs.mkdirSync( logs_directory );
-}
 
-//setup winston to write to the filesystem
-//wl = winston log
-const wl = new ( winston.Logger ) ({
-	transports : [
-		new ( winston.transports.Console )({
-			colorize: true, 
-			timestamp : ts_format        
-		}),
-		new ( winston.transports.File )({
-			filename : `${logs_directory}/application-out.log`,
-			timestamp : ts_format,
-			level : "info",
-		})
-	]
-});
+	//setup winston to write to the filesystem
+	//wl = winston log
+	const wl = new ( winston.Logger ) ({
+		transports : [
+			new ( winston.transports.Console )({
+				colorize: true, 
+				timestamp : ts_format        
+			}),
+			new ( winston.transports.File )({
+				filename : `${logs_directory}/application-out.log`,
+				timestamp : ts_format,
+				level : "info",
+			})
+		]
+	});
+}
 
 
 //root properties
