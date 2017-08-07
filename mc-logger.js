@@ -69,7 +69,9 @@ const fs = require( "fs" );
 //create the logs directory in the base of the application	
 if( process.env.NODE_ENV != "dev" && ! fs.existsSync( logs_directory ) ){
 	fs.mkdirSync( logs_directory );
+}
 
+if( process.env.NODE_ENV != "dev" ){
 	//setup winston to write to the filesystem
 	//wl = winston log
 	const wl = new ( winston.Logger ) ({
