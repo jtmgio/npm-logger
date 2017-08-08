@@ -65,11 +65,13 @@ const ts_format = () => ( new Date().getTime() );
 //stage/prod env
 const logs_directory = `/data/server/logs`;
 const fs = require( "fs" );
+const environment = process.env.NODE_ENV;
+const module_name = process.env.MODULE_NAME;
 //node 6.9.4 did not like having this as a const
 var wl;
 
 //create the logs directory in the base of the application	
-if( process.env.NODE_ENV != "dev" && ! fs.existsSync( logs_directory ) ){
+if( environment != "dev" && ! fs.existsSync( logs_directory ) ){
 	fs.mkdirSync( logs_directory );
 }
 
@@ -152,18 +154,17 @@ Logger.prototype.init = function(){ return this; };
 Logger.prototype.writeMessage = function( params ){
 	let message = fnReplaceTokens( params.message, params.args );
 
-	if( this.debug ){
+	if( environment === "dev" ){
 		log[ this.log_level ].call( log, message[ this.log_level_info.color ] );			
 		return this;
 	}
  
 	wl.info( message, {
 		log_level: this.log_level.toUpperCase(), 
-		module: this.module, 
+		module: module_name, 
 		logger: this.path, 
 		message: message
 	});	
-
 
 	return this;
 };
